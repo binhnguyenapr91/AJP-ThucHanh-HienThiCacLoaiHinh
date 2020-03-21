@@ -1,8 +1,19 @@
 import java.util.Scanner;
 
 public class App {
-    static int width;
-    static int height;
+    public static final String INVALID_STRING = "Invalid option";
+    public static final int EXIT_CODE_OK = 0;
+    public static final int OPTION_1 = 1;
+    public static final int OPTION_2 = 2;
+    public static final int OPTION_3 = 3;
+    static int inputWidth;
+    static int inputHeight;
+    static int choice=100;
+    Scanner scanner = new Scanner(System.in);
+
+    private static boolean isExit() {
+        return choice != EXIT_CODE_OK;
+    }
     void showMenu() {
         System.out.println("----------MENU-------------");
         System.out.println("1.Print rectangle");
@@ -21,60 +32,56 @@ public class App {
         System.out.println("0.Back");
         System.out.println("------------------------------------");
     }
-
+    void showInputForm(){
+        System.out.println("Enter width:");
+        inputWidth = scanner.nextInt();
+        System.out.println("Enter height:");
+        inputHeight = scanner.nextInt();
+    }
     public static void main(String[] args) {
-        int choice = 100;
+
         App app = new App();
+
         try (Scanner scanner = new Scanner(System.in)) {
-            while (choice != 0) {
+            while (isExit()) {
                 app.showMenu();
                 choice = scanner.nextInt();
                 switch (choice) {
-                    case 0:
-                        System.exit(0);
-                    case 1:
-                        System.out.println("Enter width:");
-                        width = scanner.nextInt();
-                        System.out.println("Enter height:");
-                        height = scanner.nextInt();
-                        Rectangle rec = new Rectangle(width, height);
+                    case EXIT_CODE_OK:
+                        System.exit(EXIT_CODE_OK);
+                    case OPTION_1:
+                        app.showInputForm();
+                        Rectangle rec = new Rectangle(inputWidth, inputHeight);
                         rec.draw();
                         break;
-                    case 2:
-                        int choice2 = 100;
-                        System.out.println("Enter width:");
-                        width = scanner.nextInt();
-                        System.out.println("Enter height:");
-                        height = scanner.nextInt();
-                        while (choice2 != 0) {
-                            SquareTriangle sqTriangle = new SquareTriangle(width,height);
+                    case OPTION_2:
+                        app.showInputForm();
+                        while (isExit()) {
+                            SquareTriangle sqTriangle = new SquareTriangle(inputWidth, inputHeight);
                             app.showMenu2();
-                            choice2 = scanner.nextInt();
-                            switch (choice2) {
-                                case 0:
+                            choice = scanner.nextInt();
+                            switch (choice) {
+                                case EXIT_CODE_OK:
                                     app.showMenu();
                                     break;
-                                case 1:
+                                case OPTION_1:
                                     sqTriangle.drawBottomLeft();
                                     break;
-                                case 2:
+                                case OPTION_2:
                                     sqTriangle.drawTopLeft();
                                     break;
                                 default:
-                                    System.out.println("Invalid option");
+                                    System.out.println(INVALID_STRING);
                             }
                         }
                         break;
-                    case 3:
-                        System.out.println("Enter width:");
-                        width = scanner.nextInt();
-                        System.out.println("Enter height:");
-                        height = scanner.nextInt();
-                        IsoscelesTriangle islTriangle = new IsoscelesTriangle(width,height);
+                    case OPTION_3:
+                        app.showInputForm();
+                        IsoscelesTriangle islTriangle = new IsoscelesTriangle(inputWidth, inputHeight);
                         islTriangle.draw();
                         break;
                     default:
-                        System.out.println("Invalid option");
+                        System.out.println(INVALID_STRING);
                 }
             }
         }

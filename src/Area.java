@@ -6,5 +6,4 @@ public class Area {
         this.width = width;
         this.height = height;
     }
-
 }

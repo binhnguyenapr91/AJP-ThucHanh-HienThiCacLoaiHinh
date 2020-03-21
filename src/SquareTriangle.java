@@ -5,7 +5,7 @@ public class SquareTriangle extends Rectangle {
     }
 
     void drawBottomLeft() {
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < this.width; i++) {
             for (int j = 0; j <= i; j++) {
                 System.out.print("\t*\t");
             }
@@ -14,7 +14,7 @@ public class SquareTriangle extends Rectangle {
     }
 
     void drawTopLeft() {
-        for (int i = width; i >= 0; i--) {
+        for (int i = this.width; i >= 0; i--) {
             for (int j = 0; j <= i; j++) {
                 System.out.print("\t*\t");
             }
